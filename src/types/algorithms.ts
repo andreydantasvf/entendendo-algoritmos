@@ -7,7 +7,6 @@ export interface Algorithm {
   timeComplexity: string;
   spaceComplexity: string;
   tags: string[];
-  chapter?: number;
 }
 
 export interface Category {

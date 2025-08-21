@@ -111,7 +111,7 @@ export function ComplexityAnalysis() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card className="h-full">
+              <Card className="h-full gap-2">
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between">
                     <Badge

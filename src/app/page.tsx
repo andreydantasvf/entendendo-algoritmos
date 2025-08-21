@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Header } from '@/components/Header';
-import { Stats } from '@/components/Stats';
 import { FilterSection } from '@/components/FilterSection';
 import { AlgorithmGrid } from '@/components/AlgorithmGrid';
 import { algorithms } from '@/data/algorithms';
@@ -50,9 +49,6 @@ export default function Home() {
             </motion.p>
           </div>
 
-          {/* Statistics */}
-          <Stats algorithms={algorithms} />
-
           {/* Filters */}
           <FilterSection
             algorithms={algorithms}
@@ -84,13 +80,10 @@ export default function Home() {
         <div className="container mx-auto px-4 py-8">
           <div className="text-center text-muted-foreground">
             <p>
-              Baseado no livro &ldquo;Entendendo Algoritmos&rdquo; por Aditya
+              Baseado no livro &ldquo;Entendendo Algoritmos&rdquo; de Aditya
               Bhargava
             </p>
-            <p className="text-sm mt-2">
-              Desenvolvido para estudantes e desenvolvedores que desejam
-              aprofundar seus conhecimentos
-            </p>
+            <p className="text-sm mt-2">Desenvolvido por Andrey Dantas</p>
           </div>
         </div>
       </footer>

@@ -11,7 +11,7 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Algorithm } from '@/types/algorithms';
 import { categories, getDifficultyColor } from '@/data/algorithms';
-import { Clock, HardDrive, BookOpen, Tag } from 'lucide-react';
+import { Clock, HardDrive, Tag } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface AlgorithmGridProps {
@@ -81,14 +81,6 @@ export function AlgorithmGrid({ algorithms }: AlgorithmGridProps) {
                         <CardTitle className="text-lg leading-tight">
                           {algorithm.title}
                         </CardTitle>
-                        {algorithm.chapter && (
-                          <div className="flex items-center gap-1 mt-1">
-                            <BookOpen className="h-3 w-3 text-muted-foreground" />
-                            <span className="text-xs text-muted-foreground">
-                              Capítulo {algorithm.chapter}
-                            </span>
-                          </div>
-                        )}
                       </div>
                     </div>
                     <Badge

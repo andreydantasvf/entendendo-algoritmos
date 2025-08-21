@@ -56,8 +56,7 @@ export const algorithms: Algorithm[] = [
     difficulty: 'Iniciante',
     timeComplexity: 'O(log n)',
     spaceComplexity: 'O(1)',
-    tags: ['busca', 'array', 'ordenado'],
-    chapter: 1
+    tags: ['busca', 'array', 'ordenado']
   },
   {
     id: 'linear-search',
@@ -67,8 +66,7 @@ export const algorithms: Algorithm[] = [
     difficulty: 'Iniciante',
     timeComplexity: 'O(n)',
     spaceComplexity: 'O(1)',
-    tags: ['busca', 'array', 'sequencial'],
-    chapter: 1
+    tags: ['busca', 'array', 'sequencial']
   },
   {
     id: 'breadth-first-search',
@@ -78,8 +76,7 @@ export const algorithms: Algorithm[] = [
     difficulty: 'Intermediário',
     timeComplexity: 'O(V + E)',
     spaceComplexity: 'O(V)',
-    tags: ['grafo', 'busca', 'fila'],
-    chapter: 6
+    tags: ['grafo', 'busca', 'fila']
   },
   {
     id: 'depth-first-search',
@@ -89,8 +86,7 @@ export const algorithms: Algorithm[] = [
     difficulty: 'Intermediário',
     timeComplexity: 'O(V + E)',
     spaceComplexity: 'O(V)',
-    tags: ['grafo', 'busca', 'pilha'],
-    chapter: 6
+    tags: ['grafo', 'busca', 'pilha']
   },
 
   // Algoritmos de Ordenação
@@ -102,8 +98,7 @@ export const algorithms: Algorithm[] = [
     difficulty: 'Intermediário',
     timeComplexity: 'O(n log n)',
     spaceComplexity: 'O(log n)',
-    tags: ['ordenação', 'dividir-conquistar', 'recursão'],
-    chapter: 4
+    tags: ['ordenação', 'dividir-conquistar', 'recursão']
   },
   {
     id: 'mergesort',
@@ -113,8 +108,7 @@ export const algorithms: Algorithm[] = [
     difficulty: 'Intermediário',
     timeComplexity: 'O(n log n)',
     spaceComplexity: 'O(n)',
-    tags: ['ordenação', 'dividir-conquistar', 'estável'],
-    chapter: 4
+    tags: ['ordenação', 'dividir-conquistar', 'estável']
   },
   {
     id: 'selection-sort',
@@ -124,8 +118,7 @@ export const algorithms: Algorithm[] = [
     difficulty: 'Iniciante',
     timeComplexity: 'O(n²)',
     spaceComplexity: 'O(1)',
-    tags: ['ordenação', 'seleção', 'simples'],
-    chapter: 2
+    tags: ['ordenação', 'seleção', 'simples']
   },
 
   // Algoritmos de Grafos
@@ -137,8 +130,7 @@ export const algorithms: Algorithm[] = [
     difficulty: 'Avançado',
     timeComplexity: 'O(V²)',
     spaceComplexity: 'O(V)',
-    tags: ['grafo', 'menor-caminho', 'peso'],
-    chapter: 7
+    tags: ['grafo', 'menor-caminho', 'peso']
   },
   {
     id: 'topological-sort',
@@ -148,8 +140,7 @@ export const algorithms: Algorithm[] = [
     difficulty: 'Intermediário',
     timeComplexity: 'O(V + E)',
     spaceComplexity: 'O(V)',
-    tags: ['grafo', 'ordenação', 'DAG'],
-    chapter: 6
+    tags: ['grafo', 'ordenação', 'DAG']
   },
 
   // Programação Dinâmica
@@ -161,8 +152,7 @@ export const algorithms: Algorithm[] = [
     difficulty: 'Avançado',
     timeComplexity: 'O(nW)',
     spaceComplexity: 'O(nW)',
-    tags: ['otimização', 'mochila', 'peso'],
-    chapter: 9
+    tags: ['otimização', 'mochila', 'peso']
   },
   {
     id: 'longest-common-subsequence',
@@ -172,8 +162,7 @@ export const algorithms: Algorithm[] = [
     difficulty: 'Avançado',
     timeComplexity: 'O(mn)',
     spaceComplexity: 'O(mn)',
-    tags: ['subsequência', 'strings', 'comparação'],
-    chapter: 9
+    tags: ['subsequência', 'strings', 'comparação']
   },
 
   // Algoritmos Gulosos
@@ -185,8 +174,7 @@ export const algorithms: Algorithm[] = [
     difficulty: 'Avançado',
     timeComplexity: 'O(n²)',
     spaceComplexity: 'O(n)',
-    tags: ['cobertura', 'conjunto', 'aproximação'],
-    chapter: 8
+    tags: ['cobertura', 'conjunto', 'aproximação']
   },
   {
     id: 'classroom-scheduling',
@@ -196,8 +184,7 @@ export const algorithms: Algorithm[] = [
     difficulty: 'Intermediário',
     timeComplexity: 'O(n log n)',
     spaceComplexity: 'O(1)',
-    tags: ['agendamento', 'otimização', 'recursos'],
-    chapter: 8
+    tags: ['agendamento', 'otimização', 'recursos']
   }
 ];
 

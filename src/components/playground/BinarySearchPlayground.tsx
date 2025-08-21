@@ -116,7 +116,7 @@ export function BinarySearchPlayground() {
                     <Button
                       onClick={state.isPlaying ? handlePause : handlePlay}
                       size="sm"
-                      className="px-4"
+                      className="px-4 cursor-pointer"
                     >
                       {state.isPlaying ? (
                         <>
@@ -131,7 +131,12 @@ export function BinarySearchPlayground() {
                   </motion.div>
 
                   <motion.div whileTap={{ scale: 0.95 }}>
-                    <Button onClick={handleReset} variant="outline" size="sm">
+                    <Button
+                      onClick={handleReset}
+                      variant="outline"
+                      size="sm"
+                      className="cursor-pointer"
+                    >
                       <RotateCcw className="h-4 w-4 mr-2" />
                       Reset
                     </Button>
@@ -142,6 +147,7 @@ export function BinarySearchPlayground() {
                       onClick={handleNext}
                       variant="outline"
                       size="sm"
+                      className="cursor-pointer disabled:cursor-not-allowed"
                       disabled={state.currentStep >= state.steps.length - 1}
                     >
                       <SkipForward className="h-4 w-4 mr-2" />

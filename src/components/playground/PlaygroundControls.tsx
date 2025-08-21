@@ -120,10 +120,18 @@ export function PlaygroundControls({ onStateChange }: PlaygroundControlsProps) {
         </div>
 
         <div className="flex gap-2">
-          <Button onClick={handleGenerate} variant="outline">
+          <Button
+            onClick={handleGenerate}
+            variant="outline"
+            className="cursor-pointer"
+          >
             Aplicar Configurações
           </Button>
-          <Button onClick={handleRandomGenerate} variant="outline">
+          <Button
+            onClick={handleRandomGenerate}
+            variant="outline"
+            className="cursor-pointer"
+          >
             <Shuffle className="h-4 w-4 mr-2" />
             Gerar Aleatório
           </Button>

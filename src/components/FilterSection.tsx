@@ -101,7 +101,7 @@ export function FilterSection({
             {(selectedCategory || selectedDifficulty || searchTerm) && (
               <button
                 onClick={clearFilters}
-                className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+                className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
               >
                 Limpar filtros
               </button>
