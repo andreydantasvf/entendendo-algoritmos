@@ -5,22 +5,59 @@ import { ArrayVisualization } from './ArrayVisualization';
 import { PlaygroundControls } from './PlaygroundControls';
 import { PlaygroundState } from '@/types/playground';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Play, Pause, RotateCcw, SkipForward } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { generateBinarySearchSteps } from '@/utils/binarySearch';
+
+const INITIAL_ARRAY = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+const INITIAL_TARGET = 7;
 
 export function BinarySearchPlayground() {
   const [state, setState] = useState<PlaygroundState>({
     isPlaying: false,
     isPaused: false,
     currentStep: 0,
-    steps: [],
-    array: [1, 3, 5, 7, 9, 11, 13, 15, 17, 19],
-    target: 7,
+    steps: generateBinarySearchSteps(INITIAL_ARRAY, INITIAL_TARGET),
+    array: INITIAL_ARRAY,
+    target: INITIAL_TARGET,
     speed: 1000
   });
 
   const updateState = useCallback((newState: Partial<PlaygroundState>) => {
     setState((prev) => ({ ...prev, ...newState }));
   }, []);
+
+  // Control functions
+  const handlePlay = () => {
+    if (state.currentStep >= state.steps.length - 1) {
+      updateState({ currentStep: 0, isPlaying: true, isPaused: false });
+    } else {
+      updateState({ isPlaying: true, isPaused: false });
+    }
+  };
+
+  const handlePause = () => {
+    updateState({ isPlaying: false, isPaused: true });
+  };
+
+  const handleReset = () => {
+    updateState({
+      currentStep: 0,
+      isPlaying: false,
+      isPaused: false
+    });
+  };
+
+  const handleNext = () => {
+    if (state.currentStep < state.steps.length - 1) {
+      updateState({
+        currentStep: state.currentStep + 1,
+        isPlaying: false,
+        isPaused: true
+      });
+    }
+  };
 
   // Auto-play functionality
   useEffect(() => {
@@ -46,8 +83,8 @@ export function BinarySearchPlayground() {
   const currentStep = state.steps[state.currentStep];
 
   return (
-    <div className="space-y-8">
-      {/* Visualization */}
+    <div className="space-y-6">
+      {/* Integrated Visualization and Controls */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -63,17 +100,126 @@ export function BinarySearchPlayground() {
               iteração
             </p>
           </CardHeader>
-          <CardContent>
+          <CardContent className="space-y-6">
+            {/* Array Visualization */}
             <ArrayVisualization
               array={state.array}
               currentStep={currentStep}
               target={state.target}
             />
+
+            {/* Integrated Playback Controls */}
+            <div className="border-t pt-6">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4">
+                <div className="flex items-center gap-2 order-2 sm:order-1">
+                  <motion.div whileTap={{ scale: 0.95 }}>
+                    <Button
+                      onClick={state.isPlaying ? handlePause : handlePlay}
+                      size="sm"
+                      className="px-4"
+                    >
+                      {state.isPlaying ? (
+                        <>
+                          <Pause className="h-4 w-4 mr-2" /> Pausar
+                        </>
+                      ) : (
+                        <>
+                          <Play className="h-4 w-4 mr-2" /> Play
+                        </>
+                      )}
+                    </Button>
+                  </motion.div>
+
+                  <motion.div whileTap={{ scale: 0.95 }}>
+                    <Button onClick={handleReset} variant="outline" size="sm">
+                      <RotateCcw className="h-4 w-4 mr-2" />
+                      Reset
+                    </Button>
+                  </motion.div>
+
+                  <motion.div whileTap={{ scale: 0.95 }}>
+                    <Button
+                      onClick={handleNext}
+                      variant="outline"
+                      size="sm"
+                      disabled={state.currentStep >= state.steps.length - 1}
+                    >
+                      <SkipForward className="h-4 w-4 mr-2" />
+                      Próximo
+                    </Button>
+                  </motion.div>
+                </div>
+
+                {/* Progress Info */}
+                <div className="text-sm text-muted-foreground order-1 sm:order-2">
+                  <span>
+                    Passo {state.currentStep + 1} de {state.steps.length}
+                  </span>
+                  <span className="ml-2">
+                    (
+                    {Math.round(
+                      ((state.currentStep + 1) /
+                        Math.max(state.steps.length, 1)) *
+                        100
+                    )}
+                    %)
+                  </span>
+                </div>
+              </div>
+
+              {/* Progress Bar */}
+              <div className="w-full bg-muted rounded-full h-2 mb-4">
+                <motion.div
+                  className="bg-primary h-2 rounded-full"
+                  initial={{ width: 0 }}
+                  animate={{
+                    width: `${((state.currentStep + 1) / Math.max(state.steps.length, 1)) * 100}%`
+                  }}
+                  transition={{ duration: 0.3 }}
+                />
+              </div>
+
+              {/* Current Step Description */}
+              {currentStep && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  key={state.currentStep}
+                  className="bg-muted/50 p-4 rounded-lg"
+                >
+                  <h4 className="font-medium mb-2">Passo Atual:</h4>
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    {currentStep.description}
+                  </p>
+
+                  {currentStep.found && (
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      className="mt-3 p-3 bg-green-100 dark:bg-green-900/30 rounded-lg border border-green-200 dark:border-green-800"
+                    >
+                      <div className="flex items-center gap-2">
+                        <span className="text-xl">🎉</span>
+                        <div>
+                          <h5 className="font-semibold text-green-800 dark:text-green-200 text-sm">
+                            Elemento encontrado!
+                          </h5>
+                          <p className="text-xs text-green-700 dark:text-green-300">
+                            O valor {currentStep.target} foi encontrado na
+                            posição {currentStep.mid}.
+                          </p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </motion.div>
+              )}
+            </div>
           </CardContent>
         </Card>
       </motion.div>
 
-      {/* Controls */}
+      {/* Configuration Controls */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

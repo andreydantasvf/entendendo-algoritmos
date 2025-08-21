@@ -60,7 +60,7 @@ export function ArrayVisualization({
   return (
     <div className="space-y-6">
       {/* Array principal */}
-      <div className="flex flex-wrap gap-2 justify-center p-6 bg-muted/30 rounded-lg">
+      <div className="flex flex-wrap gap-2 justify-center p-6 bg-muted/30 rounded-lg space-y-6">
         {sortedArray.map((value, index) => (
           <motion.div
             key={`${value}-${index}`}
