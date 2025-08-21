@@ -7,6 +7,8 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { BinarySearchPlayground } from '@/components/playground/BinarySearchPlayground';
+import { ComplexityAnalysis } from '@/components/ComplexityAnalysis';
+import { CodeImplementation } from '@/components/CodeImplementation';
 
 export default function BinarySearchPage() {
   return (
@@ -160,44 +162,22 @@ export default function BinarySearchPage() {
             </Card>
           </motion.div>
 
-          {/* Implementation Section */}
+          {/* Complexity Analysis Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
           >
-            <Card>
-              <CardHeader>
-                <CardTitle>Implementação em JavaScript</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <pre className="bg-muted p-4 rounded-lg overflow-x-auto text-sm">
-                  <code>{`function buscaBinaria(array, target) {
-  let left = 0;
-  let right = array.length - 1;
+            <ComplexityAnalysis />
+          </motion.div>
 
-  while (left <= right) {
-    const mid = Math.floor((left + right) / 2);
-
-    if (array[mid] === target) {
-      return mid; // Encontrou! Retorna o índice
-    } else if (array[mid] < target) {
-      left = mid + 1; // Busca na metade direita
-    } else {
-      right = mid - 1; // Busca na metade esquerda
-    }
-  }
-
-  return -1; // Não encontrou
-}
-
-// Exemplo de uso:
-const numeros = [1, 3, 5, 7, 9, 11, 13, 15];
-const resultado = buscaBinaria(numeros, 7);
-console.log(resultado); // 3 (índice do elemento 7)`}</code>
-                </pre>
-              </CardContent>
-            </Card>
+          {/* Implementation Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8 }}
+          >
+            <CodeImplementation />
           </motion.div>
         </div>
       </main>
