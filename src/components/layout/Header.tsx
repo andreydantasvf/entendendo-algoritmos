@@ -1,9 +1,32 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Code2, Github, BookOpen } from 'lucide-react';
+import { Code2, Github, BookOpen, ArrowLeft } from 'lucide-react';
+import Link from 'next/link';
+import { Button } from '../ui/button';
 
-export function Header() {
+export function Header({
+  isAlgorithmPage = false
+}: {
+  isAlgorithmPage?: boolean;
+}) {
+  if (isAlgorithmPage) {
+    return (
+      <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <Link href="/">
+              <Button variant="outline" size="sm" className="cursor-pointer">
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Voltar
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </header>
+    );
+  }
+
   return (
     <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4 py-6">

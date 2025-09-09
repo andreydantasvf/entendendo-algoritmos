@@ -1,31 +1,18 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowLeft, Clock, HardDrive, Zap } from 'lucide-react';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
+import { Clock, HardDrive, Zap } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { BinarySearchPlayground } from '@/components/playground/BinarySearchPlayground';
 import { ComplexityAnalysis } from '@/components/ComplexityAnalysis';
 import { CodeImplementation } from '@/components/CodeImplementation';
+import { Header } from '@/components/layout/Header';
 
 export default function BinarySearchPage() {
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Link href="/">
-              <Button variant="outline" size="sm" className="cursor-pointer">
-                <ArrowLeft className="h-4 w-4 mr-2" />
-                Voltar
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </header>
+      <Header isAlgorithmPage />
 
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto space-y-8">
