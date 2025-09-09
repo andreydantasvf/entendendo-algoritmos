@@ -2,7 +2,7 @@
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { CodeBlock } from '@/components/CodeBlock';
+import { CodeBlock } from '@/components/layout/CodeBlock';
 
 const javascriptCode = `function buscaBinaria(array, target) {
   let left = 0;

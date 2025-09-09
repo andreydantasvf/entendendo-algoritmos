@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Header } from '@/components/layout/Header';
-import { FilterSection } from '@/components/FilterSection';
-import { AlgorithmGrid } from '@/components/AlgorithmGrid';
+import { FilterSection } from '@/components/layout/FilterSection';
+import { AlgorithmGrid } from '@/components/layout/AlgorithmGrid';
 import { algorithms } from '@/data/algorithms';
 import { Algorithm } from '@/types/algorithms';
 
