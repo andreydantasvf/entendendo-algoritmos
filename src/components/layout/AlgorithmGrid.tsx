@@ -26,7 +26,8 @@ export function AlgorithmGrid({ algorithms }: AlgorithmGridProps) {
   const getAlgorithmUrl = (algorithmId: string) => {
     // Map specific algorithm IDs to their routes
     const algorithmRoutes: Record<string, string> = {
-      'binary-search': '/algoritmos/busca-binaria'
+      'binary-search': '/algoritmos/busca-binaria',
+      'linear-search': '/algoritmos/busca-linear'
       // Add more routes as you create them
     };
 
