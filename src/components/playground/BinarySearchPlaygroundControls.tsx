@@ -12,12 +12,14 @@ import {
   generateRandomArray
 } from '@/utils/binarySearch';
 
-interface PlaygroundControlsProps {
+interface BinarySearchPlaygroundControlsProps {
   state: PlaygroundState;
   onStateChange: (newState: Partial<PlaygroundState>) => void;
 }
 
-export function PlaygroundControls({ onStateChange }: PlaygroundControlsProps) {
+export function BinarySearchPlaygroundControls({
+  onStateChange
+}: BinarySearchPlaygroundControlsProps) {
   const [arrayInput, setArrayInput] = useState(
     '1, 3, 5, 7, 9, 11, 13, 15, 17, 19'
   );
@@ -120,11 +122,7 @@ export function PlaygroundControls({ onStateChange }: PlaygroundControlsProps) {
         </div>
 
         <div className="flex gap-2">
-          <Button
-            onClick={handleGenerate}
-            variant="outline"
-            className="cursor-pointer"
-          >
+          <Button onClick={handleGenerate} className="cursor-pointer">
             Aplicar Configurações
           </Button>
           <Button

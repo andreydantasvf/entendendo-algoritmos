@@ -2,31 +2,44 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { ArrayVisualization } from './ArrayVisualization';
-import { BinarySearchPlaygroundControls } from './BinarySearchPlaygroundControls';
-import { BinarySearchStep, PlaygroundState } from '@/types/playground';
+import { LinearSearchPlaygroundControls } from './LinearSearchPlaygroundControls';
+import { LinearSearchStep } from '@/types/playground';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Play, Pause, RotateCcw, SkipForward } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { generateBinarySearchSteps } from '@/utils/binarySearch';
+import { generateLinearSearchSteps } from '@/utils/linearSearch';
 
-const INITIAL_ARRAY = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+const INITIAL_ARRAY = [5, 2, 8, 1, 9, 3, 7, 4];
 const INITIAL_TARGET = 7;
 
-export function BinarySearchPlayground() {
-  const [state, setState] = useState<PlaygroundState>({
+interface LinearSearchPlaygroundState {
+  isPlaying: boolean;
+  isPaused: boolean;
+  currentStep: number;
+  steps: LinearSearchStep[];
+  array: number[];
+  target: number;
+  speed: number;
+}
+
+export function LinearSearchPlayground() {
+  const [state, setState] = useState<LinearSearchPlaygroundState>({
     isPlaying: false,
     isPaused: false,
     currentStep: 0,
-    steps: generateBinarySearchSteps(INITIAL_ARRAY, INITIAL_TARGET),
+    steps: generateLinearSearchSteps(INITIAL_ARRAY, INITIAL_TARGET),
     array: INITIAL_ARRAY,
     target: INITIAL_TARGET,
     speed: 1000
   });
 
-  const updateState = useCallback((newState: Partial<PlaygroundState>) => {
-    setState((prev) => ({ ...prev, ...newState }));
-  }, []);
+  const updateState = useCallback(
+    (newState: Partial<LinearSearchPlaygroundState>) => {
+      setState((prev) => ({ ...prev, ...newState }));
+    },
+    []
+  );
 
   // Control functions
   const handlePlay = () => {
@@ -80,7 +93,7 @@ export function BinarySearchPlayground() {
     }
   }, [state.isPlaying, state.currentStep, state.steps.length, state.speed]);
 
-  const currentStep = state.steps[state.currentStep] as BinarySearchStep;
+  const currentStep = state.steps[state.currentStep];
 
   return (
     <div className="space-y-6">
@@ -93,11 +106,10 @@ export function BinarySearchPlayground() {
         <Card>
           <CardHeader>
             <CardTitle className="text-center">
-              Visualização da Busca Binária
+              Visualização da Busca Linear
             </CardTitle>
             <p className="text-center text-muted-foreground">
-              Acompanhe como o algoritmo divide o array pela metade a cada
-              iteração
+              Acompanhe como o algoritmo verifica cada elemento sequencialmente
             </p>
           </CardHeader>
           <CardContent className="space-y-6">
@@ -212,7 +224,8 @@ export function BinarySearchPlayground() {
                           </h5>
                           <p className="text-xs text-green-700 dark:text-green-300">
                             O valor {currentStep.target} foi encontrado na
-                            posição {currentStep.mid}.
+                            posição {currentStep.currentIndex} após{' '}
+                            {currentStep.comparisons} comparação(ões).
                           </p>
                         </div>
                       </div>
@@ -231,7 +244,7 @@ export function BinarySearchPlayground() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
-        <BinarySearchPlaygroundControls
+        <LinearSearchPlaygroundControls
           state={state}
           onStateChange={updateState}
         />
