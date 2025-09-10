@@ -1,13 +1,12 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Clock, HardDrive, Zap } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { BinarySearchPlayground } from '@/components/playground/BinarySearchPlayground';
 import { ComplexityAnalysis } from '@/components/ComplexityAnalysis';
 import { CodeImplementation } from '@/components/CodeImplementation';
 import { Header } from '@/components/layout/Header';
+import { AlgorithmHeader } from '@/components/layout/AlgorithmHeader';
 
 export default function BinarySearchPage() {
   return (
@@ -16,47 +15,13 @@ export default function BinarySearchPage() {
 
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto space-y-8">
-          {/* Title Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center space-y-4"
-          >
-            <h1 className="text-4xl font-bold tracking-tight">Busca Binária</h1>
-            <p className="text-xl text-muted-foreground">
-              Um algoritmo eficiente para encontrar elementos em arrays
-              ordenados
-            </p>
-
-            {/* Algorithm Stats */}
-            <div className="flex flex-wrap justify-center gap-6 mt-6">
-              <div className="flex items-center space-x-2 text-sm">
-                <Clock className="h-4 w-4 text-blue-500" />
-                <span className="text-muted-foreground">
-                  Complexidade temporal:
-                </span>
-                <code className="font-mono bg-muted px-2 py-1 rounded">
-                  O(log n)
-                </code>
-              </div>
-              <div className="flex items-center space-x-2 text-sm">
-                <HardDrive className="h-4 w-4 text-green-500" />
-                <span className="text-muted-foreground">
-                  Complexidade espacial:
-                </span>
-                <code className="font-mono bg-muted px-2 py-1 rounded">
-                  O(1)
-                </code>
-              </div>
-              <div className="flex items-center space-x-2 text-sm">
-                <Zap className="h-4 w-4 text-yellow-500" />
-                <span className="text-muted-foreground">Dificuldade:</span>
-                <Badge className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
-                  Iniciante
-                </Badge>
-              </div>
-            </div>
-          </motion.div>
+          <AlgorithmHeader
+            title="Busca Binária"
+            description="Um algoritmo eficiente para encontrar elementos em arrays ordenados"
+            temporalComplexity="O(log n)"
+            spatialComplexity="O(1)"
+            difficulty="Iniciante"
+          />
 
           {/* Explanation Section */}
           <motion.div
