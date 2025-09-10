@@ -4,9 +4,11 @@ import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { BinarySearchPlayground } from '@/components/playground/BinarySearchPlayground';
 import { ComplexityAnalysis } from '@/components/ComplexityAnalysis';
-import { CodeImplementation } from '@/components/CodeImplementation';
+import { CodeImplementation } from '@/components/layout/CodeImplementation';
 import { Header } from '@/components/layout/Header';
 import { AlgorithmHeader } from '@/components/layout/AlgorithmHeader';
+import { javascriptImplementations } from './js-implementation';
+import { pythonImplementations } from './python-implementation';
 
 export default function BinarySearchPage() {
   return (
@@ -125,10 +127,43 @@ export default function BinarySearchPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8 }}
           >
-            <CodeImplementation />
+            <CodeImplementation
+              codes={[...javascriptImplementations, ...pythonImplementations]}
+              extraComponent={<ImplementationComparative />}
+            />
           </motion.div>
         </div>
       </main>
+    </div>
+  );
+}
+
+function ImplementationComparative() {
+  return (
+    <div className="grid md:grid-cols-2 gap-4">
+      <div className="bg-green-50 dark:bg-green-950/30 p-4 rounded-lg border border-green-200 dark:border-green-800">
+        <h5 className="font-semibold text-green-900 dark:text-green-100 mb-2">
+          ✅ Versão Iterativa
+        </h5>
+        <ul className="text-green-800 dark:text-green-200 text-sm space-y-1">
+          <li>• Usa O(1) de memória extra</li>
+          <li>• Mais eficiente para arrays grandes</li>
+          <li>• Não há risco de stack overflow</li>
+          <li>• Geralmente mais rápida na prática</li>
+        </ul>
+      </div>
+
+      <div className="bg-blue-50 dark:bg-blue-950/30 p-4 rounded-lg border border-blue-200 dark:border-blue-800">
+        <h5 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">
+          📚 Versão Recursiva
+        </h5>
+        <ul className="text-blue-800 dark:text-blue-200 text-sm space-y-1">
+          <li>• Mais elegante e legível</li>
+          <li>• Usa O(log n) de memória (pilha)</li>
+          <li>• Boa para fins educacionais</li>
+          <li>• Pode causar stack overflow em arrays muito grandes</li>
+        </ul>
+      </div>
     </div>
   );
 }
