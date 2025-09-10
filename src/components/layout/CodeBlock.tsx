@@ -43,12 +43,12 @@ export function CodeBlock({ code, language, className = '' }: CodeBlockProps) {
 
   return (
     <div className={`relative ${className}`}>
-      <div className="absolute top-3 right-3 z-10">
+      <div className="absolute top-2 right-2 z-10">
         <Button
           variant="outline"
           size="sm"
           onClick={copyToClipboard}
-          className="h-8 w-8 p-0 bg-background/80 backdrop-blur"
+          className="h-8 w-8 p-0 bg-background/80 backdrop-blur cursor-pointer"
         >
           {copied ? (
             <Check className="h-3 w-3 text-green-500" />
@@ -58,7 +58,7 @@ export function CodeBlock({ code, language, className = '' }: CodeBlockProps) {
         </Button>
       </div>
 
-      <pre className="bg-muted p-4 rounded-lg overflow-x-auto text-sm pt-12">
+      <pre className="bg-muted rounded-lg overflow-x-auto text-sm">
         <code
           dangerouslySetInnerHTML={{ __html: highlightedCode }}
           className={`hljs language-${language}`}
