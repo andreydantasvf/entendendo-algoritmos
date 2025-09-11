@@ -1,4 +1,4 @@
-import { type CodesBlock } from '@/components/layout/CodeImplementation';
+import { type CodesBlock } from '@/types/code-block';
 
 export const pythonCode = `def busca_binaria(array, target):
     """

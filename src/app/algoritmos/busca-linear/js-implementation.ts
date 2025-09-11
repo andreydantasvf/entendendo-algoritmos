@@ -1,4 +1,4 @@
-import { type CodesBlock } from '@/components/layout/CodeImplementation';
+import { type CodesBlock } from '@/types/code-block';
 
 const javascriptCode = `function buscaLinear(array, target) {
   // Percorre todo o array elemento por elemento

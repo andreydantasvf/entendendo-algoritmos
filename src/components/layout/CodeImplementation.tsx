@@ -3,15 +3,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { CodeBlock } from '@/components/layout/CodeBlock';
-
-export type CodesBlock = {
-  code: string;
-  language: string;
-  tabTitle: string;
-  tabValue: string;
-  title: string;
-  description: string;
-};
+import { type CodesBlock } from '@/types/code-block';
 
 interface CodeImplementationProps {
   codes: CodesBlock[];
