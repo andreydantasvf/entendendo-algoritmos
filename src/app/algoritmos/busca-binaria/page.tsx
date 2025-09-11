@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { BinarySearchPlayground } from '@/components/playground/BinarySearchPlayground';
-import { ComplexityAnalysis } from '@/components/ComplexityAnalysis';
+import { ComplexityAnalysis } from './ComplexityAnalysis';
 import { CodeImplementation } from '@/components/layout/CodeImplementation';
 import { Header } from '@/components/layout/Header';
 import { AlgorithmHeader } from '@/components/layout/AlgorithmHeader';
