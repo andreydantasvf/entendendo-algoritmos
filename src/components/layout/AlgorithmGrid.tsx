@@ -23,17 +23,6 @@ export function AlgorithmGrid({ algorithms }: AlgorithmGridProps) {
     return categories.find((cat) => cat.id === categoryId);
   };
 
-  const getAlgorithmUrl = (algorithmId: string) => {
-    // Map specific algorithm IDs to their routes
-    const algorithmRoutes: Record<string, string> = {
-      'binary-search': '/algoritmos/busca-binaria',
-      'linear-search': '/algoritmos/busca-linear'
-      // Add more routes as you create them
-    };
-
-    return algorithmRoutes[algorithmId] || '#';
-  };
-
   if (algorithms.length === 0) {
     return (
       <motion.div
@@ -56,7 +45,7 @@ export function AlgorithmGrid({ algorithms }: AlgorithmGridProps) {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {algorithms.map((algorithm, index) => {
         const categoryInfo = getCategoryInfo(algorithm.category);
-        const algorithmUrl = getAlgorithmUrl(algorithm.id);
+        const algorithmUrl = algorithm.url;
 
         return (
           <motion.div

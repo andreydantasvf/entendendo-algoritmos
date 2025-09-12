@@ -56,7 +56,8 @@ export const algorithms: Algorithm[] = [
     difficulty: 'Iniciante',
     timeComplexity: 'O(log n)',
     spaceComplexity: 'O(1)',
-    tags: ['busca', 'array', 'ordenado']
+    tags: ['busca', 'array', 'ordenado'],
+    url: 'busca-binaria'
   },
   {
     id: 'linear-search',
@@ -66,40 +67,10 @@ export const algorithms: Algorithm[] = [
     difficulty: 'Iniciante',
     timeComplexity: 'O(n)',
     spaceComplexity: 'O(1)',
-    tags: ['busca', 'array', 'sequencial']
-  },
-  {
-    id: 'breadth-first-search',
-    title: 'Busca em Largura (BFS)',
-    description: 'Algoritmo para explorar grafos nivel por nivel',
-    category: 'graph',
-    difficulty: 'Intermediário',
-    timeComplexity: 'O(V + E)',
-    spaceComplexity: 'O(V)',
-    tags: ['grafo', 'busca', 'fila']
-  },
-  {
-    id: 'depth-first-search',
-    title: 'Busca em Profundidade (DFS)',
-    description: 'Algoritmo para explorar grafos em profundidade',
-    category: 'graph',
-    difficulty: 'Intermediário',
-    timeComplexity: 'O(V + E)',
-    spaceComplexity: 'O(V)',
-    tags: ['grafo', 'busca', 'pilha']
+    tags: ['busca', 'array', 'sequencial'],
+    url: 'busca-linear'
   },
 
-  // Algoritmos de Ordenação
-  {
-    id: 'quicksort',
-    title: 'Quick Sort',
-    description: 'Algoritmo eficiente de ordenação por divisão e conquista',
-    category: 'sort',
-    difficulty: 'Intermediário',
-    timeComplexity: 'O(n log n)',
-    spaceComplexity: 'O(log n)',
-    tags: ['ordenação', 'dividir-conquistar', 'recursão']
-  },
   {
     id: 'mergesort',
     title: 'Merge Sort',
@@ -108,84 +79,118 @@ export const algorithms: Algorithm[] = [
     difficulty: 'Intermediário',
     timeComplexity: 'O(n log n)',
     spaceComplexity: 'O(n)',
-    tags: ['ordenação', 'dividir-conquistar', 'estável']
-  },
-  {
-    id: 'selection-sort',
-    title: 'Selection Sort',
-    description: 'Algoritmo simples de ordenação por seleção',
-    category: 'sort',
-    difficulty: 'Iniciante',
-    timeComplexity: 'O(n²)',
-    spaceComplexity: 'O(1)',
-    tags: ['ordenação', 'seleção', 'simples']
-  },
-
-  // Algoritmos de Grafos
-  {
-    id: 'dijkstra',
-    title: 'Algoritmo de Dijkstra',
-    description: 'Encontra o menor caminho em grafos com pesos positivos',
-    category: 'graph',
-    difficulty: 'Avançado',
-    timeComplexity: 'O(V²)',
-    spaceComplexity: 'O(V)',
-    tags: ['grafo', 'menor-caminho', 'peso']
-  },
-  {
-    id: 'topological-sort',
-    title: 'Ordenação Topológica',
-    description: 'Ordena vértices de um grafo direcionado acíclico',
-    category: 'graph',
-    difficulty: 'Intermediário',
-    timeComplexity: 'O(V + E)',
-    spaceComplexity: 'O(V)',
-    tags: ['grafo', 'ordenação', 'DAG']
-  },
-
-  // Programação Dinâmica
-  {
-    id: 'knapsack',
-    title: 'Problema da Mochila',
-    description: 'Otimização de itens com peso e valor limitados',
-    category: 'dynamic',
-    difficulty: 'Avançado',
-    timeComplexity: 'O(nW)',
-    spaceComplexity: 'O(nW)',
-    tags: ['otimização', 'mochila', 'peso']
-  },
-  {
-    id: 'longest-common-subsequence',
-    title: 'Maior Subsequência Comum',
-    description: 'Encontra a maior subsequência comum entre duas sequências',
-    category: 'dynamic',
-    difficulty: 'Avançado',
-    timeComplexity: 'O(mn)',
-    spaceComplexity: 'O(mn)',
-    tags: ['subsequência', 'strings', 'comparação']
-  },
-
-  // Algoritmos Gulosos
-  {
-    id: 'greedy-set-cover',
-    title: 'Cobertura de Conjunto',
-    description: 'Problema de cobertura usando estratégia gulosa',
-    category: 'greedy',
-    difficulty: 'Avançado',
-    timeComplexity: 'O(n²)',
-    spaceComplexity: 'O(n)',
-    tags: ['cobertura', 'conjunto', 'aproximação']
-  },
-  {
-    id: 'classroom-scheduling',
-    title: 'Agendamento de Salas',
-    description: 'Otimiza o uso de recursos limitados',
-    category: 'greedy',
-    difficulty: 'Intermediário',
-    timeComplexity: 'O(n log n)',
-    spaceComplexity: 'O(1)',
-    tags: ['agendamento', 'otimização', 'recursos']
+    tags: ['ordenação', 'dividir-conquistar', 'estável'],
+    url: 'merge-sort'
   }
+
+  // {
+  //   id: 'breadth-first-search',
+  //   title: 'Busca em Largura (BFS)',
+  //   description: 'Algoritmo para explorar grafos nivel por nivel',
+  //   category: 'graph',
+  //   difficulty: 'Intermediário',
+  //   timeComplexity: 'O(V + E)',
+  //   spaceComplexity: 'O(V)',
+  //   tags: ['grafo', 'busca', 'fila']
+  // },
+  // {
+  //   id: 'depth-first-search',
+  //   title: 'Busca em Profundidade (DFS)',
+  //   description: 'Algoritmo para explorar grafos em profundidade',
+  //   category: 'graph',
+  //   difficulty: 'Intermediário',
+  //   timeComplexity: 'O(V + E)',
+  //   spaceComplexity: 'O(V)',
+  //   tags: ['grafo', 'busca', 'pilha']
+  // },
+
+  // // Algoritmos de Ordenação
+  // {
+  //   id: 'quicksort',
+  //   title: 'Quick Sort',
+  //   description: 'Algoritmo eficiente de ordenação por divisão e conquista',
+  //   category: 'sort',
+  //   difficulty: 'Intermediário',
+  //   timeComplexity: 'O(n log n)',
+  //   spaceComplexity: 'O(log n)',
+  //   tags: ['ordenação', 'dividir-conquistar', 'recursão']
+  // },
+  // {
+  //   id: 'selection-sort',
+  //   title: 'Selection Sort',
+  //   description: 'Algoritmo simples de ordenação por seleção',
+  //   category: 'sort',
+  //   difficulty: 'Iniciante',
+  //   timeComplexity: 'O(n²)',
+  //   spaceComplexity: 'O(1)',
+  //   tags: ['ordenação', 'seleção', 'simples']
+  // },
+
+  // // Algoritmos de Grafos
+  // {
+  //   id: 'dijkstra',
+  //   title: 'Algoritmo de Dijkstra',
+  //   description: 'Encontra o menor caminho em grafos com pesos positivos',
+  //   category: 'graph',
+  //   difficulty: 'Avançado',
+  //   timeComplexity: 'O(V²)',
+  //   spaceComplexity: 'O(V)',
+  //   tags: ['grafo', 'menor-caminho', 'peso']
+  // },
+  // {
+  //   id: 'topological-sort',
+  //   title: 'Ordenação Topológica',
+  //   description: 'Ordena vértices de um grafo direcionado acíclico',
+  //   category: 'graph',
+  //   difficulty: 'Intermediário',
+  //   timeComplexity: 'O(V + E)',
+  //   spaceComplexity: 'O(V)',
+  //   tags: ['grafo', 'ordenação', 'DAG']
+  // },
+
+  // // Programação Dinâmica
+  // {
+  //   id: 'knapsack',
+  //   title: 'Problema da Mochila',
+  //   description: 'Otimização de itens com peso e valor limitados',
+  //   category: 'dynamic',
+  //   difficulty: 'Avançado',
+  //   timeComplexity: 'O(nW)',
+  //   spaceComplexity: 'O(nW)',
+  //   tags: ['otimização', 'mochila', 'peso']
+  // },
+  // {
+  //   id: 'longest-common-subsequence',
+  //   title: 'Maior Subsequência Comum',
+  //   description: 'Encontra a maior subsequência comum entre duas sequências',
+  //   category: 'dynamic',
+  //   difficulty: 'Avançado',
+  //   timeComplexity: 'O(mn)',
+  //   spaceComplexity: 'O(mn)',
+  //   tags: ['subsequência', 'strings', 'comparação']
+  // },
+
+  // // Algoritmos Gulosos
+  // {
+  //   id: 'greedy-set-cover',
+  //   title: 'Cobertura de Conjunto',
+  //   description: 'Problema de cobertura usando estratégia gulosa',
+  //   category: 'greedy',
+  //   difficulty: 'Avançado',
+  //   timeComplexity: 'O(n²)',
+  //   spaceComplexity: 'O(n)',
+  //   tags: ['cobertura', 'conjunto', 'aproximação']
+  // },
+  // {
+  //   id: 'classroom-scheduling',
+  //   title: 'Agendamento de Salas',
+  //   description: 'Otimiza o uso de recursos limitados',
+  //   category: 'greedy',
+  //   difficulty: 'Intermediário',
+  //   timeComplexity: 'O(n log n)',
+  //   spaceComplexity: 'O(1)',
+  //   tags: ['agendamento', 'otimização', 'recursos']
+  // }
 ];
 
 export const getDifficultyColor = (difficulty: string): string => {
