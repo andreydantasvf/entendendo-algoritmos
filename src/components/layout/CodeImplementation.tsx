@@ -24,9 +24,13 @@ export function CodeImplementation({
       </CardHeader>
       <CardContent>
         <Tabs defaultValue={codes[0].tabValue} className="w-full">
-          <TabsList className="w-full gap-1 flex items-center justify-center">
+          <TabsList className="w-full gap-1 flex items-center justify-start md:justify-center overflow-x-auto">
             {codes.map((code) => (
-              <TabsTrigger key={code.tabValue} value={code.tabValue}>
+              <TabsTrigger
+                key={code.tabValue}
+                value={code.tabValue}
+                className="flex-shrink-0"
+              >
                 {code.tabTitle}
               </TabsTrigger>
             ))}
