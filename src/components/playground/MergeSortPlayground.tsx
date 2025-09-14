@@ -6,6 +6,9 @@ import { generateMergeSortSteps } from '@/utils/mergeSort';
 import { MergeSortStep, MergeTreeNode } from '@/types/playground';
 import { cn } from '@/lib/utils';
 import { MergeSortPlaygroundControls } from './MergeSortPlaygroundControls';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Play, Pause, SkipForward } from 'lucide-react';
 
 const MAX_VALUE = 100;
 const MIN_VALUE = 5;
@@ -209,31 +212,112 @@ export default function MergeSortPlayground() {
     [steps, currentStep]
   );
 
+  const handleNext = () => {
+    if (currentStep < steps.length - 1) {
+      setCurrentStep(currentStep + 1);
+      setIsPlaying(false);
+    }
+  };
+
   return (
     <PlaygroundContext.Provider value={{ currentStep: currentStepData }}>
-      <div className="w-full mx-auto">
-        <MergeSortPlaygroundControls
-          onPlayPause={() => setIsPlaying(!isPlaying)}
-          onReset={() => generateArray(array.length)}
-          onSpeedChange={setSpeed}
-          onSizeChange={(size: number) => generateArray(size)}
-          isPlaying={isPlaying}
-          speed={speed}
-          size={array.length}
-        />
-        <div className="mt-4 p-4 bg-gray-100 dark:bg-gray-900 rounded-lg min-h-[400px] flex items-center justify-center overflow-x-auto">
-          {currentTree && (
-            <AnimatePresence>
-              <TreeNode node={currentTree} fullTree={currentTree} />
-            </AnimatePresence>
-          )}
-        </div>
-        <div className="mt-4 text-center text-sm text-muted-foreground">
-          <p>
-            Passo {currentStep + 1} de {steps.length}
-          </p>
-          <p>{steps[currentStep]?.description}</p>
-        </div>
+      <div className="w-full mx-auto space-y-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-center">
+                Visualização do Merge Sort
+              </CardTitle>
+              <p className="text-center text-muted-foreground">
+                Acompanhe o processo de divisão e conquista em tempo real.
+              </p>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="min-h-[400px] flex items-center justify-center overflow-x-auto bg-muted/30 p-4 rounded-lg">
+                {currentTree && (
+                  <AnimatePresence>
+                    <TreeNode node={currentTree} fullTree={currentTree} />
+                  </AnimatePresence>
+                )}
+              </div>
+
+              <div className="border-t pt-6">
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4">
+                  <div className="flex items-center gap-2 order-2 sm:order-1">
+                    <Button
+                      onClick={() => setIsPlaying(!isPlaying)}
+                      size="sm"
+                      className="px-4"
+                    >
+                      {isPlaying ? (
+                        <>
+                          <Pause className="h-4 w-4 mr-2" /> Pausar
+                        </>
+                      ) : (
+                        <>
+                          <Play className="h-4 w-4 mr-2" /> Play
+                        </>
+                      )}
+                    </Button>
+                    <Button
+                      onClick={handleNext}
+                      variant="outline"
+                      size="sm"
+                      disabled={currentStep >= steps.length - 1}
+                    >
+                      <SkipForward className="h-4 w-4 mr-2" /> Próximo
+                    </Button>
+                  </div>
+                  <div className="text-sm text-muted-foreground order-1 sm:order-2">
+                    Passo {currentStep + 1} de {steps.length}
+                  </div>
+                </div>
+
+                <div className="w-full bg-muted rounded-full h-2 mb-4">
+                  <motion.div
+                    className="bg-primary h-2 rounded-full"
+                    animate={{
+                      width: `${((currentStep + 1) / steps.length) * 100}%`
+                    }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </div>
+
+                {currentStepData && (
+                  <motion.div
+                    key={currentStep}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-muted/50 p-4 rounded-lg"
+                  >
+                    <h4 className="font-medium mb-2">Ação Atual:</h4>
+                    <p className="text-sm leading-relaxed text-muted-foreground">
+                      {currentStepData.description}
+                    </p>
+                  </motion.div>
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <MergeSortPlaygroundControls
+            onReset={() => generateArray(array.length)}
+            onSpeedChange={setSpeed}
+            onSizeChange={(size: number) => generateArray(size)}
+            speed={speed}
+            size={array.length}
+          />
+        </motion.div>
       </div>
     </PlaygroundContext.Provider>
   );
