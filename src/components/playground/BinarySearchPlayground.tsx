@@ -111,12 +111,15 @@ export function BinarySearchPlayground() {
             {/* Integrated Playback Controls */}
             <div className="border-t pt-6">
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4">
-                <div className="flex items-center gap-2 order-2 sm:order-1">
-                  <motion.div whileTap={{ scale: 0.95 }}>
+                <div className="flex flex-col sm:flex-row items-center gap-2 order-2 sm:order-1">
+                  <motion.div
+                    whileTap={{ scale: 0.95 }}
+                    className="w-full sm:w-auto"
+                  >
                     <Button
                       onClick={state.isPlaying ? handlePause : handlePlay}
                       size="sm"
-                      className="px-4 cursor-pointer"
+                      className="px-4 cursor-pointer w-full sm:w-auto"
                     >
                       {state.isPlaying ? (
                         <>
@@ -130,24 +133,30 @@ export function BinarySearchPlayground() {
                     </Button>
                   </motion.div>
 
-                  <motion.div whileTap={{ scale: 0.95 }}>
+                  <motion.div
+                    whileTap={{ scale: 0.95 }}
+                    className="w-full sm:w-auto"
+                  >
                     <Button
                       onClick={handleReset}
                       variant="outline"
                       size="sm"
-                      className="cursor-pointer"
+                      className="cursor-pointer w-full sm:w-auto"
                     >
                       <RotateCcw className="h-4 w-4 mr-2" />
                       Reset
                     </Button>
                   </motion.div>
 
-                  <motion.div whileTap={{ scale: 0.95 }}>
+                  <motion.div
+                    whileTap={{ scale: 0.95 }}
+                    className="w-full sm:w-auto"
+                  >
                     <Button
                       onClick={handleNext}
                       variant="outline"
                       size="sm"
-                      className="cursor-pointer disabled:cursor-not-allowed"
+                      className="cursor-pointer disabled:cursor-not-allowed w-full sm:w-auto"
                       disabled={state.currentStep >= state.steps.length - 1}
                     >
                       <SkipForward className="h-4 w-4 mr-2" />

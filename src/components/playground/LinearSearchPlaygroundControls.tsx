@@ -126,7 +126,7 @@ export function LinearSearchPlaygroundControls({
           </div>
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex flex-wrap justify-center md:justify-start gap-2">
           <Button onClick={handleGenerate} className="cursor-pointer">
             Aplicar Configurações
           </Button>
