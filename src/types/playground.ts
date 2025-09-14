@@ -17,18 +17,38 @@ export interface LinearSearchStep {
   comparisons: number;
 }
 
+export interface MergeTreeNode {
+  id: number;
+  array: number[];
+  level: number;
+  children: MergeTreeNode[];
+  isSorted: boolean;
+  isActive: boolean;
+  parent: number | null;
+}
+
+export type MergeSortStepType = 'split' | 'compare' | 'merge' | 'sorted';
+
+export interface MergeSortStep {
+  type: MergeSortStepType;
+  tree: MergeTreeNode;
+  description: string;
+  sortedNodeId?: number;
+  highlight?: number[];
+}
+
 export interface PlaygroundState {
   isPlaying: boolean;
   isPaused: boolean;
   currentStep: number;
-  steps: BinarySearchStep[] | LinearSearchStep[];
+  steps: (BinarySearchStep | LinearSearchStep | MergeSortStep)[];
   array: number[];
-  target: number;
+  target: number | null;
   speed: number;
 }
 
 export interface VisualizationProps {
   array: number[];
-  currentStep?: BinarySearchStep | LinearSearchStep;
-  target: number;
+  currentStep?: BinarySearchStep | LinearSearchStep | MergeSortStep;
+  target: number | null;
 }

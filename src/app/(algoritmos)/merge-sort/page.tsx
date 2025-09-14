@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { motion } from 'framer-motion';
 import { pythonImplementations } from './python-implementation';
 import { javascriptImplementations } from './js-implementation';
+import MergeSortPlayground from '@/components/playground/MergeSortPlayground';
 
 export default function MergeSortPage() {
   return (
@@ -139,7 +140,7 @@ export default function MergeSortPage() {
                 </p>
               </CardHeader>
               <CardContent>
-                {/* A visualização do merge sort deve ficar localizada aqui*/}
+                <MergeSortPlayground />
               </CardContent>
             </Card>
           </motion.div>

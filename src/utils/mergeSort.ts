@@ -1,260 +1,161 @@
 import { MergeSortStep, MergeTreeNode } from '@/types/playground';
 
+function cloneTree(node: MergeTreeNode): MergeTreeNode {
+  const newNode: MergeTreeNode = { ...node, children: [] };
+  if (node.children) {
+    newNode.children = node.children.map(cloneTree);
+  }
+  return newNode;
+}
+
+function findNode(tree: MergeTreeNode, id: number): MergeTreeNode | undefined {
+  if (tree.id === id) return tree;
+  for (const child of tree.children) {
+    const found = findNode(child, id);
+    if (found) return found;
+  }
+  return undefined;
+}
+
 export function generateMergeSortSteps(array: number[]): MergeSortStep[] {
   const steps: MergeSortStep[] = [];
+  let nodeIdCounter = 0;
 
-  // Função para criar uma árvore de divisão
-  function createMergeTree(arr: number[], level: number = 0): MergeTreeNode {
-    const node: MergeTreeNode = {
-      array: [...arr],
-      level,
-      isActive: false,
-      isComplete: false
-    };
+  const root: MergeTreeNode = {
+    id: nodeIdCounter++,
+    array: [...array],
+    level: 0,
+    children: [],
+    isSorted: false,
+    isActive: false,
+    parent: null
+  };
 
-    if (arr.length <= 1) {
-      node.isComplete = true;
-      return node;
+  steps.push({
+    type: 'split',
+    tree: cloneTree(root),
+    description: `Array inicial: [${array.join(', ')}]`
+  });
+
+  function split(node: MergeTreeNode) {
+    const { array, level } = node;
+    if (array.length <= 1) {
+      node.isSorted = true;
+      return;
     }
 
-    const mid = Math.floor(arr.length / 2);
-    const left = arr.slice(0, mid);
-    const right = arr.slice(mid);
+    const mid = Math.floor(array.length / 2);
+    const leftArray = array.slice(0, mid);
+    const rightArray = array.slice(mid);
 
-    node.left = createMergeTree(left, level + 1);
-    node.right = createMergeTree(right, level + 1);
+    const leftChild: MergeTreeNode = {
+      id: nodeIdCounter++,
+      array: leftArray,
+      level: level + 1,
+      children: [],
+      isSorted: leftArray.length === 1,
+      isActive: false,
+      parent: node.id
+    };
 
-    return node;
-  }
+    const rightChild: MergeTreeNode = {
+      id: nodeIdCounter++,
+      array: rightArray,
+      level: level + 1,
+      children: [],
+      isSorted: rightArray.length === 1,
+      isActive: false,
+      parent: node.id
+    };
 
-  // Função para gerar os passos de divisão
-  function generateSplitSteps(node: MergeTreeNode, tree: MergeTreeNode) {
-    if (node.array.length <= 1) return;
+    node.children = [leftChild, rightChild];
 
-    // Marcar o nó atual como ativo
-    const activeTree = JSON.parse(JSON.stringify(tree));
-    markNodeActive(activeTree, node.array);
+    const newTree = cloneTree(root);
+    const activeNode = findNode(newTree, node.id);
+    if (activeNode) {
+      activeNode.isActive = true;
+    }
 
     steps.push({
       type: 'split',
-      level: node.level,
-      leftArray: node.left?.array,
-      rightArray: node.right?.array,
-      description: `Dividindo array [${node.array.join(', ')}] em dois sub-arrays: [${node.left?.array.join(', ')}] e [${node.right?.array.join(', ')}]`,
-      isComplete: false,
-      tree: activeTree
+      tree: newTree,
+      description: `Dividindo nó ${node.id} : [${array.join(
+        ', '
+      )}] em [${leftArray.join(', ')}] e [${rightArray.join(', ')}]`
     });
 
-    if (node.left) generateSplitSteps(node.left, tree);
-    if (node.right) generateSplitSteps(node.right, tree);
+    split(leftChild);
+    split(rightChild);
   }
 
-  // Função para gerar os passos de mesclagem
-  function generateMergeSteps(
-    node: MergeTreeNode,
-    tree: MergeTreeNode
-  ): number[] {
-    if (node.array.length <= 1) {
+  function merge(node: MergeTreeNode): number[] {
+    if (node.isSorted) {
       return node.array;
     }
 
-    // Recursão para os filhos primeiro
-    const leftSorted = node.left ? generateMergeSteps(node.left, tree) : [];
-    const rightSorted = node.right ? generateMergeSteps(node.right, tree) : [];
+    const [leftChild, rightChild] = node.children;
+    const left = merge(leftChild);
+    const right = merge(rightChild);
 
-    // Agora mesclar os arrays ordenados
-    return merge(leftSorted, rightSorted, tree, node.level);
-  }
-
-  // Função para mesclar dois arrays ordenados
-  function merge(
-    left: number[],
-    right: number[],
-    tree: MergeTreeNode,
-    level: number
-  ): number[] {
-    const result: number[] = [];
+    const merged: number[] = [];
     let leftIndex = 0;
     let rightIndex = 0;
 
-    // Passo inicial da mesclagem
     steps.push({
-      type: 'merge',
-      level,
-      currentMerge: {
-        left: [...left],
-        right: [...right],
-        result: [],
-        leftIndex: 0,
-        rightIndex: 0,
-        comparing: false
-      },
-      description: `Iniciando mesclagem dos arrays [${left.join(', ')}] e [${right.join(', ')}]`,
-      isComplete: false,
-      tree: JSON.parse(JSON.stringify(tree))
+      type: 'compare',
+      tree: cloneTree(root),
+      description: `Comparando para mesclar para o nó ${node.id} `
     });
 
     while (leftIndex < left.length && rightIndex < right.length) {
-      // Passo de comparação
-      steps.push({
-        type: 'compare',
-        level,
-        currentMerge: {
-          left: [...left],
-          right: [...right],
-          result: [...result],
-          leftIndex,
-          rightIndex,
-          comparing: true
-        },
-        description: `Comparando ${left[leftIndex]} (esquerda) com ${right[rightIndex]} (direita)`,
-        isComplete: false,
-        tree: JSON.parse(JSON.stringify(tree))
-      });
-
-      // Passo de movimento
       if (left[leftIndex] <= right[rightIndex]) {
-        result.push(left[leftIndex]);
-        steps.push({
-          type: 'move',
-          level,
-          currentMerge: {
-            left: [...left],
-            right: [...right],
-            result: [...result],
-            leftIndex: leftIndex + 1,
-            rightIndex,
-            comparing: false
-          },
-          description: `${left[leftIndex]} é menor ou igual. Movendo para o resultado.`,
-          isComplete: false,
-          tree: JSON.parse(JSON.stringify(tree))
-        });
+        merged.push(left[leftIndex]);
         leftIndex++;
       } else {
-        result.push(right[rightIndex]);
-        steps.push({
-          type: 'move',
-          level,
-          currentMerge: {
-            left: [...left],
-            right: [...right],
-            result: [...result],
-            leftIndex,
-            rightIndex: rightIndex + 1,
-            comparing: false
-          },
-          description: `${right[rightIndex]} é menor. Movendo para o resultado.`,
-          isComplete: false,
-          tree: JSON.parse(JSON.stringify(tree))
-        });
+        merged.push(right[rightIndex]);
         rightIndex++;
       }
     }
 
-    // Adicionar elementos restantes
-    while (leftIndex < left.length) {
-      result.push(left[leftIndex]);
-      steps.push({
-        type: 'move',
-        level,
-        currentMerge: {
-          left: [...left],
-          right: [...right],
-          result: [...result],
-          leftIndex: leftIndex + 1,
-          rightIndex,
-          comparing: false
-        },
-        description: `Adicionando elemento restante ${left[leftIndex]} da esquerda`,
-        isComplete: false,
-        tree: JSON.parse(JSON.stringify(tree))
-      });
-      leftIndex++;
+    const result = merged
+      .concat(left.slice(leftIndex))
+      .concat(right.slice(rightIndex));
+    node.array = result;
+    node.isSorted = true;
+
+    const newTreeMerge = cloneTree(root);
+    const mergedNode = findNode(newTreeMerge, node.id);
+    if (mergedNode) {
+      mergedNode.array = result;
+      mergedNode.isSorted = true;
+      mergedNode.isActive = true;
     }
 
-    while (rightIndex < right.length) {
-      result.push(right[rightIndex]);
-      steps.push({
-        type: 'move',
-        level,
-        currentMerge: {
-          left: [...left],
-          right: [...right],
-          result: [...result],
-          leftIndex,
-          rightIndex: rightIndex + 1,
-          comparing: false
-        },
-        description: `Adicionando elemento restante ${right[rightIndex]} da direita`,
-        isComplete: false,
-        tree: JSON.parse(JSON.stringify(tree))
-      });
-      rightIndex++;
-    }
+    steps.push({
+      type: 'merge',
+      tree: newTreeMerge,
+      description: `Nó ${node.id} mesclado para: [${result.join(', ')}]`
+    });
+
+    steps.push({
+      type: 'sorted',
+      tree: cloneTree(root),
+      description: `Nó ${node.id} ordenado.`,
+      sortedNodeId: node.id
+    });
 
     return result;
   }
 
-  // Função auxiliar para marcar um nó como ativo na árvore
-  function markNodeActive(tree: MergeTreeNode, targetArray: number[]) {
-    if (arraysEqual(tree.array, targetArray)) {
-      tree.isActive = true;
-      return;
-    }
-    if (tree.left) markNodeActive(tree.left, targetArray);
-    if (tree.right) markNodeActive(tree.right, targetArray);
-  }
+  split(root);
+  merge(root);
 
-  // Função auxiliar para comparar arrays
-  function arraysEqual(a: number[], b: number[]): boolean {
-    return a.length === b.length && a.every((val, i) => val === b[i]);
-  }
-
-  // Gerar a árvore completa
-  const tree = createMergeTree(array);
-
-  // Gerar passos de divisão
-  generateSplitSteps(tree, tree);
-
-  // Gerar passos de mesclagem
-  generateMergeSteps(tree, tree);
-
-  // Marcar o último passo como completo
-  if (steps.length > 0) {
-    steps[steps.length - 1].isComplete = true;
-    steps[steps.length - 1].description =
-      'Algoritmo concluído! Array completamente ordenado.';
-  }
+  steps.push({
+    type: 'sorted',
+    tree: cloneTree(root),
+    description: `Array final ordenado! Array Original: [${array.join(', ')}]`,
+    sortedNodeId: root.id
+  });
 
   return steps;
-}
-
-// Função utilitária para executar merge sort (sem visualização)
-export function mergeSort(array: number[]): number[] {
-  if (array.length <= 1) return array;
-
-  const mid = Math.floor(array.length / 2);
-  const left = array.slice(0, mid);
-  const right = array.slice(mid);
-
-  return merge(mergeSort(left), mergeSort(right));
-}
-
-function merge(left: number[], right: number[]): number[] {
-  const result: number[] = [];
-  let leftIndex = 0;
-  let rightIndex = 0;
-
-  while (leftIndex < left.length && rightIndex < right.length) {
-    if (left[leftIndex] <= right[rightIndex]) {
-      result.push(left[leftIndex]);
-      leftIndex++;
-    } else {
-      result.push(right[rightIndex]);
-      rightIndex++;
-    }
-  }
-
-  return result.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
 }
