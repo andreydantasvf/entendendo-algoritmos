@@ -41,7 +41,7 @@ export interface PlaygroundState {
   isPlaying: boolean;
   isPaused: boolean;
   currentStep: number;
-  steps: (BinarySearchStep | LinearSearchStep | MergeSortStep)[];
+  steps: (BinarySearchStep | LinearSearchStep)[];
   array: number[];
   target: number | null;
   speed: number;
@@ -49,6 +49,6 @@ export interface PlaygroundState {
 
 export interface VisualizationProps {
   array: number[];
-  currentStep?: BinarySearchStep | LinearSearchStep | MergeSortStep;
+  currentStep?: BinarySearchStep | LinearSearchStep;
   target: number | null;
 }

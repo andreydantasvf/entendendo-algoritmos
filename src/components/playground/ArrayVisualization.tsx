@@ -114,7 +114,7 @@ export function ArrayVisualization({
   return (
     <div className="space-y-6">
       {/* Array principal */}
-      <div className="flex flex-wrap gap-2 justify-center p-6 bg-muted/30 rounded-lg space-y-6">
+      <div className="flex flex-wrap gap-2 justify-center p-2 sm:p-6 bg-muted/30 rounded-lg space-y-6">
         {displayArray.map((value: number, index: number) => (
           <motion.div
             key={`${value}-${index}`}
@@ -122,7 +122,7 @@ export function ArrayVisualization({
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.05 }}
             className={cn(
-              'relative min-w-12 h-12 rounded-lg border-2 flex items-center justify-center font-mono font-bold text-sm transition-all duration-500',
+              'relative min-w-6 sm:min-w-12 h-6 sm:h-12 rounded-lg border-2 flex items-center justify-center font-mono font-bold text-sm transition-all duration-500',
               getItemStyle(index)
             )}
           >
