@@ -6,10 +6,10 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue
-} from '../ui/select';
+} from '@/components/ui/select';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Settings, Shuffle } from 'lucide-react';
-import { Button } from '../ui/button';
+import { Button } from '@/components/ui/button';
 
 interface MergeSortPlaygroundControlsProps {
   onReset: (size: number) => void;

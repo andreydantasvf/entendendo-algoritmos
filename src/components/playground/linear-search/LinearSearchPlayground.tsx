@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { ArrayVisualization } from './ArrayVisualization';
+import { ArrayVisualization } from '../ArrayVisualization';
 import { LinearSearchPlaygroundControls } from './LinearSearchPlaygroundControls';
 import { LinearSearchStep } from '@/types/playground';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';

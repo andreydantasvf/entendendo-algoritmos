@@ -3,7 +3,7 @@
 import { AlgorithmHeader } from '@/components/layout/AlgorithmHeader';
 import { CodeImplementation } from '@/components/layout/CodeImplementation';
 import { Header } from '@/components/layout/Header';
-import { LinearSearchPlayground } from '@/components/playground/LinearSearchPlayground';
+import { LinearSearchPlayground } from '@/components/playground/linear-search/LinearSearchPlayground';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { motion } from 'framer-motion';
 import { javascriptImplementations } from './js-implementation';

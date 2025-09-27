@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { BinarySearchPlayground } from '@/components/playground/BinarySearchPlayground';
+import { BinarySearchPlayground } from '@/components/playground/binary-search/BinarySearchPlayground';
 import { ComplexityAnalysis } from './ComplexityAnalysis';
 import { CodeImplementation } from '@/components/layout/CodeImplementation';
 import { Header } from '@/components/layout/Header';

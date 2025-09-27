@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { motion } from 'framer-motion';
 import { pythonImplementations } from './python-implementation';
 import { javascriptImplementations } from './js-implementation';
-import MergeSortPlayground from '@/components/playground/MergeSortPlayground';
+import MergeSortPlayground from '@/components/playground/merge-sort/MergeSortPlayground';
 
 export default function MergeSortPage() {
   return (
