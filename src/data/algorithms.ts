@@ -81,6 +81,17 @@ export const algorithms: Algorithm[] = [
     spaceComplexity: 'O(n)',
     tags: ['ordenação', 'dividir-conquistar', 'estável'],
     url: 'merge-sort'
+  },
+  {
+    id: 'quicksort',
+    title: 'Quick Sort',
+    description: 'Algoritmo eficiente de ordenação por divisão e conquista',
+    category: 'sort',
+    difficulty: 'Intermediário',
+    timeComplexity: 'O(n log n)',
+    spaceComplexity: 'O(log n)',
+    tags: ['ordenação', 'dividir-conquistar', 'recursão'],
+    url: 'quick-sort'
   }
 
   // {
@@ -105,16 +116,6 @@ export const algorithms: Algorithm[] = [
   // },
 
   // // Algoritmos de Ordenação
-  // {
-  //   id: 'quicksort',
-  //   title: 'Quick Sort',
-  //   description: 'Algoritmo eficiente de ordenação por divisão e conquista',
-  //   category: 'sort',
-  //   difficulty: 'Intermediário',
-  //   timeComplexity: 'O(n log n)',
-  //   spaceComplexity: 'O(log n)',
-  //   tags: ['ordenação', 'dividir-conquistar', 'recursão']
-  // },
   // {
   //   id: 'selection-sort',
   //   title: 'Selection Sort',

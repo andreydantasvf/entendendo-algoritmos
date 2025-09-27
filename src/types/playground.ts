@@ -52,3 +52,25 @@ export interface VisualizationProps {
   currentStep?: BinarySearchStep | LinearSearchStep;
   target: number | null;
 }
+
+export type QuickSortStepType =
+  | 'partition'
+  | 'compare'
+  | 'swap'
+  | 'pivot'
+  | 'sorted';
+
+export interface QuickSortStep {
+  type: QuickSortStepType;
+  array: number[];
+  low: number;
+  high: number;
+  pivotIndex: number;
+  i: number;
+  j: number;
+  description: string;
+  highlight?: number[];
+  sortedIndices?: number[];
+}
+
+export type PivotStrategy = 'first' | 'last' | 'random' | 'median';
