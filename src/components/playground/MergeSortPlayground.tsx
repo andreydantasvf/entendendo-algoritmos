@@ -1,6 +1,13 @@
 'use client';
 
-import { useState, useEffect, useMemo, createContext, useContext } from 'react';
+import {
+  useState,
+  useEffect,
+  useMemo,
+  createContext,
+  useContext,
+  useRef
+} from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { generateMergeSortSteps } from '@/utils/mergeSort';
 import { MergeSortStep, MergeTreeNode } from '@/types/playground';
@@ -40,13 +47,15 @@ function ArrayBars({
   level,
   isComparing,
   isMerging,
-  isSorted
+  isSorted,
+  barWidth
 }: {
   array: number[];
   level: number;
   isComparing?: boolean;
   isMerging?: boolean;
   isSorted?: boolean;
+  barWidth: number;
 }) {
   const max = Math.max(...array, 1);
 
@@ -59,7 +68,10 @@ function ArrayBars({
   ];
 
   return (
-    <div className="flex items-end justify-center gap-1 h-32">
+    <div
+      className="flex items-end justify-center gap-1 h-32"
+      style={{ gap: array.length > 12 ? '2px' : '4px' }}
+    >
       {array.map((value, index) => {
         const color = isSorted
           ? '#22c55e' // green-500
@@ -79,9 +91,15 @@ function ArrayBars({
               backgroundColor: color
             }}
             transition={{ duration: 0.5, ease: 'easeInOut' }}
-            className="w-8 rounded-t-sm flex items-center justify-center"
+            style={{ width: `${barWidth}px` }}
+            className="rounded-t-sm flex items-center justify-center"
           >
-            <span className="text-black font-bold text-sm">{value}</span>
+            <span
+              className="text-black font-bold"
+              style={{ fontSize: array.length > 8 ? '10px' : '12px' }}
+            >
+              {value}
+            </span>
           </motion.div>
         );
       })}
@@ -91,10 +109,12 @@ function ArrayBars({
 
 const TreeNode = ({
   node,
-  fullTree
+  fullTree,
+  barWidth
 }: {
   node: MergeTreeNode;
   fullTree: MergeTreeNode;
+  barWidth: number;
 }) => {
   const { currentStep } = usePlayground();
 
@@ -148,6 +168,7 @@ const TreeNode = ({
           isComparing={isComparing}
           isMerging={isMerging}
           isSorted={isNodeSorted}
+          barWidth={barWidth}
         />
       </div>
       {children.length > 0 && (
@@ -159,7 +180,7 @@ const TreeNode = ({
           {children.map((child) => (
             <div key={child.id} className="relative">
               <div className="absolute top-0 left-1/2 -translate-x-1/2 h-4 w-px bg-border" />
-              <TreeNode node={child} fullTree={fullTree} />
+              <TreeNode node={child} fullTree={fullTree} barWidth={barWidth} />
             </div>
           ))}
         </div>
@@ -174,6 +195,24 @@ export default function MergeSortPlayground() {
   const [currentStep, setCurrentStep] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [speed, setSpeed] = useState(1);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [containerWidth, setContainerWidth] = useState(0);
+
+  useEffect(() => {
+    const node = containerRef.current;
+    if (!node) return;
+
+    const observer = new ResizeObserver((entries) => {
+      if (entries[0]) {
+        setContainerWidth(entries[0].contentRect.width);
+      }
+    });
+    observer.observe(node);
+
+    return () => {
+      observer.unobserve(node);
+    };
+  }, []);
 
   const generateArray = (size: number) => {
     const newArray = Array.from({ length: size }, () =>
@@ -201,6 +240,28 @@ export default function MergeSortPlayground() {
     }
     return () => clearTimeout(timer);
   }, [isPlaying, currentStep, steps, speed]);
+
+  const { scale, barWidth } = useMemo(() => {
+    if (!containerWidth || !array.length) return { scale: 1, barWidth: 28 };
+
+    const baseBarWidth = array.length > 12 ? 20 : 28;
+    const nodePadding = 16; // p-2 on each side
+    const treeGap = 16;
+
+    // Estimate width of a single leaf node
+    const leafNodeWidth = baseBarWidth + nodePadding;
+
+    // Estimate total width required for the bottom-most level (leaves)
+    const requiredWidth =
+      array.length * leafNodeWidth + (array.length - 1) * treeGap;
+
+    let scale = 1;
+    if (requiredWidth > containerWidth) {
+      scale = containerWidth / (requiredWidth + 48); // Add some extra padding
+    }
+
+    return { scale: Math.max(scale, 0.3), barWidth: baseBarWidth }; // Set a minimum scale
+  }, [containerWidth, array.length]);
 
   const currentStepData = useMemo(
     () => (steps[currentStep] ? steps[currentStep] : null),
@@ -237,11 +298,24 @@ export default function MergeSortPlayground() {
               </p>
             </CardHeader>
             <CardContent className="space-y-6">
-              <div className="min-h-[400px] flex items-center justify-center overflow-x-auto bg-muted/30 p-4 rounded-lg">
+              <div
+                ref={containerRef}
+                className="min-h-[400px] flex items-center justify-center overflow-x-auto bg-muted/30 p-4 rounded-lg"
+              >
                 {currentTree && (
-                  <AnimatePresence>
-                    <TreeNode node={currentTree} fullTree={currentTree} />
-                  </AnimatePresence>
+                  <motion.div
+                    animate={{ scale }}
+                    transition={{ duration: 0.5 }}
+                    className="origin-center min-w-full flex justify-center"
+                  >
+                    <AnimatePresence>
+                      <TreeNode
+                        node={currentTree}
+                        fullTree={currentTree}
+                        barWidth={barWidth}
+                      />
+                    </AnimatePresence>
+                  </motion.div>
                 )}
               </div>
 

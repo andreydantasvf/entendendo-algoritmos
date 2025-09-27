@@ -38,21 +38,20 @@ export function MergeSortPlaygroundControls({
         </p>
       </CardHeader>
       <CardContent className="space-y-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="flex items-end flex-wrap justify-center md:justify-start gap-4">
           <div className="space-y-2">
             <label className="text-sm font-medium">Velocidade</label>
             <Select
               value={speed.toString()}
               onValueChange={(value) => onSpeedChange(Number(value))}
             >
-              <SelectTrigger>
+              <SelectTrigger className="w-[180px]">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="0.5">0.5x</SelectItem>
                 <SelectItem value="1">1x</SelectItem>
                 <SelectItem value="2">2x</SelectItem>
-                <SelectItem value="4">4x</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -62,23 +61,23 @@ export function MergeSortPlaygroundControls({
               value={size.toString()}
               onValueChange={(value) => onSizeChange(Number(value))}
             >
-              <SelectTrigger>
+              <SelectTrigger className="w-[180px]">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="4">4</SelectItem>
                 <SelectItem value="8">8</SelectItem>
                 <SelectItem value="12">12</SelectItem>
-                <SelectItem value="16">16</SelectItem>
               </SelectContent>
             </Select>
           </div>
-        </div>
-        <div className="flex flex-wrap justify-center md:justify-start gap-2">
-          <Button onClick={() => onReset(size)} variant="outline">
-            <Shuffle className="h-4 w-4 mr-2" />
-            Gerar Novo Array
-          </Button>
+
+          <div className="flex flex-wrap justify-center md:justify-start gap-2">
+            <Button onClick={() => onReset(size)} variant="outline">
+              <Shuffle className="h-4 w-4 mr-2" />
+              Gerar Novo Array
+            </Button>
+          </div>
         </div>
       </CardContent>
     </Card>
