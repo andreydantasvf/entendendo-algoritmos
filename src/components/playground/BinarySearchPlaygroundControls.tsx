@@ -11,6 +11,13 @@ import {
   parseArrayInput,
   generateRandomArray
 } from '@/utils/binarySearch';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from '../ui/select';
 
 interface BinarySearchPlaygroundControlsProps {
   state: PlaygroundState;
@@ -105,19 +112,21 @@ export function BinarySearchPlaygroundControls({
               placeholder="7"
             />
           </div>
-          <div>
-            <label className="text-sm font-medium mb-2 block">
-              Velocidade (ms)
-            </label>
-            <Input
-              type="number"
+          <div className="space-y-2">
+            <label className="text-sm font-medium">Velocidade</label>
+            <Select
               value={speedInput}
-              onChange={(e) => setSpeedInput(e.target.value)}
-              placeholder="1000"
-              min="100"
-              max="5000"
-              step="100"
-            />
+              onValueChange={(value) => setSpeedInput(value)}
+            >
+              <SelectTrigger className="w-[180px]">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="2000">0.5x</SelectItem>
+                <SelectItem value="1000">1x</SelectItem>
+                <SelectItem value="500">2x</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
         </div>
 
