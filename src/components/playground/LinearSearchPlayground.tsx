@@ -6,7 +6,7 @@ import { LinearSearchPlaygroundControls } from './LinearSearchPlaygroundControls
 import { LinearSearchStep } from '@/types/playground';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Play, Pause, RotateCcw, SkipForward } from 'lucide-react';
+import { Play, Pause, RotateCcw, SkipForward, SkipBack } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { generateLinearSearchSteps } from '@/utils/linearSearch';
 
@@ -66,6 +66,16 @@ export function LinearSearchPlayground() {
     if (state.currentStep < state.steps.length - 1) {
       updateState({
         currentStep: state.currentStep + 1,
+        isPlaying: false,
+        isPaused: true
+      });
+    }
+  };
+
+  const handleBack = () => {
+    if (state.currentStep > 0) {
+      updateState({
+        currentStep: state.currentStep - 1,
         isPlaying: false,
         isPaused: true
       });
@@ -157,6 +167,22 @@ export function LinearSearchPlayground() {
                     >
                       <RotateCcw className="h-4 w-4 mr-2" />
                       Reset
+                    </Button>
+                  </motion.div>
+
+                  <motion.div
+                    whileTap={{ scale: 0.95 }}
+                    className="w-full sm:w-auto"
+                  >
+                    <Button
+                      onClick={handleBack}
+                      variant="outline"
+                      size="sm"
+                      className="cursor-pointer disabled:cursor-not-allowed w-full sm:w-auto"
+                      disabled={state.currentStep <= 0}
+                    >
+                      <SkipBack className="h-4 w-4 mr-2" />
+                      Voltar
                     </Button>
                   </motion.div>
 

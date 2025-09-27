@@ -15,7 +15,7 @@ import { cn } from '@/lib/utils';
 import { MergeSortPlaygroundControls } from './MergeSortPlaygroundControls';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Play, Pause, SkipForward, RotateCcw } from 'lucide-react';
+import { Play, Pause, SkipForward, RotateCcw, SkipBack } from 'lucide-react';
 
 const MAX_VALUE = 100;
 const MIN_VALUE = 5;
@@ -280,6 +280,13 @@ export default function MergeSortPlayground() {
     }
   };
 
+  const handleBack = () => {
+    if (currentStep > 0) {
+      setCurrentStep(currentStep - 1);
+      setIsPlaying(false);
+    }
+  };
+
   const handleReset = () => {
     setCurrentStep(0);
     setIsPlaying(false);
@@ -351,6 +358,15 @@ export default function MergeSortPlayground() {
                     >
                       <RotateCcw className="h-4 w-4 mr-2" />
                       Reset
+                    </Button>
+
+                    <Button
+                      onClick={handleBack}
+                      variant="outline"
+                      size="sm"
+                      disabled={currentStep <= 0}
+                    >
+                      <SkipBack className="h-4 w-4 mr-2" /> Voltar
                     </Button>
 
                     <Button
