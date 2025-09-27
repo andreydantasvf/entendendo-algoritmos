@@ -11,6 +11,13 @@ import {
   parseArrayInput,
   generateRandomArray
 } from '@/utils/linearSearch';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from '../ui/select';
 
 interface LinearSearchPlaygroundState {
   isPlaying: boolean;
@@ -113,16 +120,20 @@ export function LinearSearchPlaygroundControls({
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium">Velocidade (ms)</label>
-            <Input
+            <label className="text-sm font-medium">Velocidade</label>
+            <Select
               value={speedInput}
-              onChange={(e) => setSpeedInput(e.target.value)}
-              placeholder="1000"
-              type="number"
-              min="100"
-              max="3000"
-              step="100"
-            />
+              onValueChange={(value) => setSpeedInput(value)}
+            >
+              <SelectTrigger className="w-[180px]">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="2000">0.5x</SelectItem>
+                <SelectItem value="1000">1x</SelectItem>
+                <SelectItem value="500">2x</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
         </div>
 

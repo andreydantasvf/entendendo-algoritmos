@@ -31,40 +31,6 @@ function buscaLinearElemento(array, target) {
   return null; // Não encontrou
 }`;
 
-const javascriptWithIndexCode = `function buscaLinearComDetalhes(array, target) {
-  const detalhes = {
-    elemento: null,
-    indice: -1,
-    comparacoes: 0,
-    encontrado: false
-  };
-
-  for (let i = 0; i < array.length; i++) {
-    detalhes.comparacoes++;
-
-    if (array[i] === target) {
-      detalhes.elemento = array[i];
-      detalhes.indice = i;
-      detalhes.encontrado = true;
-      break; // Para a busca quando encontra
-    }
-  }
-
-  return detalhes;
-}
-
-// Exemplo de uso:
-const frutas = ['maçã', 'banana', 'laranja', 'uva', 'manga'];
-const resultado = buscaLinearComDetalhes(frutas, 'laranja');
-
-console.log(resultado);
-// {
-//   elemento: 'laranja',
-//   indice: 2,
-//   comparacoes: 3,
-//   encontrado: true
-// }`;
-
 export const javascriptImplementations = [
   {
     code: javascriptCode,
@@ -74,14 +40,5 @@ export const javascriptImplementations = [
     title: 'Implementação Básica - JavaScript',
     description:
       'Versão simples da busca linear que percorre o array elemento por elemento até encontrar o valor desejado.'
-  },
-  {
-    code: javascriptWithIndexCode,
-    language: 'javascript',
-    tabTitle: 'JavaScript Detalhado',
-    tabValue: 'js-detailed',
-    title: 'Implementação Detalhada - JavaScript',
-    description:
-      'Versão que retorna informações adicionais sobre a busca, incluindo número de comparações realizadas.'
   }
 ] as CodesBlock[];
