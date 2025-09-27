@@ -236,11 +236,11 @@ export default function QuickSortPlayground() {
 
               <div className="border-t pt-6">
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4">
-                  <div className="flex items-center gap-2 order-2 sm:order-1">
+                  <div className="flex flex-col sm:flex-row items-center gap-2 order-2 sm:order-1">
                     <Button
                       onClick={() => setIsPlaying(!isPlaying)}
                       size="sm"
-                      className="cursor-pointer px-4"
+                      className="cursor-pointer px-4 w-full sm:w-auto"
                     >
                       {isPlaying ? (
                         <>
@@ -268,6 +268,7 @@ export default function QuickSortPlayground() {
                       variant="outline"
                       size="sm"
                       disabled={currentStep <= 0}
+                      className="w-full sm:w-auto"
                     >
                       <SkipBack className="h-4 w-4 mr-2" /> Voltar
                     </Button>
@@ -277,6 +278,7 @@ export default function QuickSortPlayground() {
                       variant="outline"
                       size="sm"
                       disabled={currentStep >= steps.length - 1}
+                      className="w-full sm:w-auto"
                     >
                       <SkipForward className="h-4 w-4 mr-2" /> Próximo
                     </Button>

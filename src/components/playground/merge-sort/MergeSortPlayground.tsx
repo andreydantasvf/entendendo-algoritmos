@@ -333,11 +333,11 @@ export default function MergeSortPlayground() {
 
               <div className="border-t pt-6">
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4">
-                  <div className="flex items-center gap-2 order-2 sm:order-1">
+                  <div className="flex flex-col sm:flex-row items-center gap-2 order-2 sm:order-1">
                     <Button
                       onClick={() => setIsPlaying(!isPlaying)}
                       size="sm"
-                      className="cursor-pointer px-4"
+                      className="cursor-pointer px-4 w-full sm:w-auto"
                     >
                       {isPlaying ? (
                         <>
@@ -364,6 +364,7 @@ export default function MergeSortPlayground() {
                       onClick={handleBack}
                       variant="outline"
                       size="sm"
+                      className="w-full sm:w-auto"
                       disabled={currentStep <= 0}
                     >
                       <SkipBack className="h-4 w-4 mr-2" /> Voltar
@@ -373,6 +374,7 @@ export default function MergeSortPlayground() {
                       onClick={handleNext}
                       variant="outline"
                       size="sm"
+                      className="w-full sm:w-auto"
                       disabled={currentStep >= steps.length - 1}
                     >
                       <SkipForward className="h-4 w-4 mr-2" /> Próximo
