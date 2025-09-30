@@ -92,6 +92,17 @@ export const algorithms: Algorithm[] = [
     spaceComplexity: 'O(log n)',
     tags: ['ordenação', 'dividir-conquistar', 'recursão'],
     url: 'quick-sort'
+  },
+  {
+    id: 'selection-sort',
+    title: 'Selection Sort',
+    description: 'Algoritmo simples de ordenação por seleção',
+    category: 'sort',
+    difficulty: 'Iniciante',
+    timeComplexity: 'O(n²)',
+    spaceComplexity: 'O(1)',
+    tags: ['ordenação', 'seleção', 'simples'],
+    url: 'selection-sort'
   }
 
   // {
@@ -116,16 +127,6 @@ export const algorithms: Algorithm[] = [
   // },
 
   // // Algoritmos de Ordenação
-  // {
-  //   id: 'selection-sort',
-  //   title: 'Selection Sort',
-  //   description: 'Algoritmo simples de ordenação por seleção',
-  //   category: 'sort',
-  //   difficulty: 'Iniciante',
-  //   timeComplexity: 'O(n²)',
-  //   spaceComplexity: 'O(1)',
-  //   tags: ['ordenação', 'seleção', 'simples']
-  // },
 
   // // Algoritmos de Grafos
   // {

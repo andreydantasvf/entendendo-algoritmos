@@ -74,3 +74,16 @@ export interface QuickSortStep {
 }
 
 export type PivotStrategy = 'first' | 'last' | 'random' | 'median';
+
+export type SelectionSortStepType = 'compare' | 'select' | 'swap' | 'sorted';
+
+export interface SelectionSortStep {
+  type: SelectionSortStepType;
+  array: number[];
+  currentIndex: number;
+  minIndex: number;
+  comparingIndex: number;
+  description: string;
+  highlight?: number[];
+  sortedIndices?: number[];
+}
