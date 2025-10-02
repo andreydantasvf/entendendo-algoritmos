@@ -100,3 +100,21 @@ export interface BubbleSortStep {
   highlight?: number[];
   sortedIndices?: number[];
 }
+
+export type InsertionSortStepType =
+  | 'select'
+  | 'compare'
+  | 'shift'
+  | 'insert'
+  | 'sorted';
+
+export interface InsertionSortStep {
+  type: InsertionSortStepType;
+  array: number[];
+  currentIndex: number;
+  key: number;
+  comparingIndex: number;
+  description: string;
+  highlight?: number[];
+  sortedIndices?: number[];
+}
