@@ -103,6 +103,28 @@ export const algorithms: Algorithm[] = [
     spaceComplexity: 'O(1)',
     tags: ['ordenação', 'seleção', 'simples'],
     url: 'selection-sort'
+  },
+  {
+    id: 'bubble-sort',
+    title: 'Bubble Sort',
+    description: 'Algoritmo simples de ordenação por bolha',
+    category: 'sort',
+    difficulty: 'Iniciante',
+    timeComplexity: 'O(n²)',
+    spaceComplexity: 'O(1)',
+    tags: ['ordenação', 'bolha', 'simples'],
+    url: 'bubble-sort'
+  },
+  {
+    id: 'insertion-sort',
+    title: 'Insertion Sort',
+    description: 'Algoritmo simples de ordenação por inserção',
+    category: 'sort',
+    difficulty: 'Iniciante',
+    timeComplexity: 'O(n²)',
+    spaceComplexity: 'O(1)',
+    tags: ['ordenação', 'inserção', 'simples'],
+    url: 'insertion-sort'
   }
 
   // {

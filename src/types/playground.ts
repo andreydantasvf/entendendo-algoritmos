@@ -87,3 +87,16 @@ export interface SelectionSortStep {
   highlight?: number[];
   sortedIndices?: number[];
 }
+
+export type BubbleSortStepType = 'compare' | 'swap' | 'pass' | 'sorted';
+
+export interface BubbleSortStep {
+  type: BubbleSortStepType;
+  array: number[];
+  pass: number;
+  currentIndex: number;
+  nextIndex: number;
+  description: string;
+  highlight?: number[];
+  sortedIndices?: number[];
+}
