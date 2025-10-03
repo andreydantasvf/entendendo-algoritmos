@@ -118,3 +118,24 @@ export interface InsertionSortStep {
   highlight?: number[];
   sortedIndices?: number[];
 }
+
+export type CountingSortStepType =
+  | 'count'
+  | 'accumulate'
+  | 'place'
+  | 'complete';
+
+export interface CountingSortStep {
+  type: CountingSortStepType;
+  inputArray: number[];
+  countArray: number[];
+  outputArray: number[];
+  currentIndex: number;
+  currentValue: number;
+  minValue: number;
+  maxValue: number;
+  description: string;
+  highlightInput?: number[];
+  highlightCount?: number[];
+  highlightOutput?: number[];
+}

@@ -125,6 +125,18 @@ export const algorithms: Algorithm[] = [
     spaceComplexity: 'O(1)',
     tags: ['ordenação', 'inserção', 'simples'],
     url: 'insertion-sort'
+  },
+  {
+    id: 'counting-sort',
+    title: 'Counting Sort',
+    description:
+      'Algoritmo de ordenação não comparativo que utiliza contagem de ocorrências',
+    category: 'sort',
+    difficulty: 'Intermediário',
+    timeComplexity: 'O(n + k)',
+    spaceComplexity: 'O(k)',
+    tags: ['ordenação', 'contagem', 'não-comparativo'],
+    url: 'counting-sort'
   }
 
   // {
