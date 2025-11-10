@@ -139,3 +139,18 @@ export interface CountingSortStep {
   highlightCount?: number[];
   highlightOutput?: number[];
 }
+
+export type RadixSortStepType = 'distribute' | 'collect' | 'complete';
+
+export interface RadixSortStep {
+  type: RadixSortStepType;
+  array: number[];
+  buckets: number[][];
+  currentDigit: number;
+  currentIndex: number;
+  currentValue: number;
+  maxDigits: number;
+  description: string;
+  highlightArray?: number[];
+  highlightBucket?: number;
+}

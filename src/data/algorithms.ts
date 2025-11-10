@@ -137,6 +137,18 @@ export const algorithms: Algorithm[] = [
     spaceComplexity: 'O(k)',
     tags: ['ordenação', 'contagem', 'não-comparativo'],
     url: 'counting-sort'
+  },
+  {
+    id: 'radix-sort',
+    title: 'Radix Sort',
+    description:
+      'Algoritmo de ordenação não comparativo que ordena elementos processando dígitos individuais',
+    category: 'sort',
+    difficulty: 'Intermediário',
+    timeComplexity: 'O(d × n)',
+    spaceComplexity: 'O(n + k)',
+    tags: ['ordenação', 'dígitos', 'não-comparativo'],
+    url: 'radix-sort'
   }
 
   // {
