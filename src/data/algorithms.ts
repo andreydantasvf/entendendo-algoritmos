@@ -149,18 +149,18 @@ export const algorithms: Algorithm[] = [
     spaceComplexity: 'O(n + k)',
     tags: ['ordenação', 'dígitos', 'não-comparativo'],
     url: 'radix-sort'
+  },
+  {
+    id: 'breadth-first-search',
+    title: 'Busca em Largura (BFS)',
+    description: 'Algoritmo para explorar grafos nivel por nivel',
+    category: 'graph',
+    difficulty: 'Intermediário',
+    timeComplexity: 'O(V + E)',
+    spaceComplexity: 'O(V)',
+    tags: ['grafo', 'busca', 'fila'],
+    url: 'busca-em-largura'
   }
-
-  // {
-  //   id: 'breadth-first-search',
-  //   title: 'Busca em Largura (BFS)',
-  //   description: 'Algoritmo para explorar grafos nivel por nivel',
-  //   category: 'graph',
-  //   difficulty: 'Intermediário',
-  //   timeComplexity: 'O(V + E)',
-  //   spaceComplexity: 'O(V)',
-  //   tags: ['grafo', 'busca', 'fila']
-  // },
   // {
   //   id: 'depth-first-search',
   //   title: 'Busca em Profundidade (DFS)',

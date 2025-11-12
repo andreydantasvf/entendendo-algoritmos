@@ -154,3 +154,40 @@ export interface RadixSortStep {
   highlightArray?: number[];
   highlightBucket?: number;
 }
+
+export interface GraphNode {
+  id: string;
+  label: string;
+  x: number;
+  y: number;
+}
+
+export interface GraphEdge {
+  from: string;
+  to: string;
+}
+
+export interface Graph {
+  nodes: GraphNode[];
+  edges: GraphEdge[];
+}
+
+export type BFSStepType =
+  | 'start'
+  | 'enqueue'
+  | 'dequeue'
+  | 'visit'
+  | 'explore'
+  | 'found'
+  | 'complete';
+
+export interface BFSStep {
+  type: BFSStepType;
+  currentNode: string | null;
+  queue: string[];
+  visited: string[];
+  exploring: string[];
+  path: string[];
+  targetFound: boolean;
+  description: string;
+}
