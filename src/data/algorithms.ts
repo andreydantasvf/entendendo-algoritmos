@@ -160,17 +160,18 @@ export const algorithms: Algorithm[] = [
     spaceComplexity: 'O(V)',
     tags: ['grafo', 'busca', 'fila'],
     url: 'busca-em-largura'
+  },
+  {
+    id: 'depth-first-search',
+    title: 'Busca em Profundidade (DFS)',
+    description: 'Algoritmo para explorar grafos em profundidade',
+    category: 'graph',
+    difficulty: 'Intermediário',
+    timeComplexity: 'O(V + E)',
+    spaceComplexity: 'O(V)',
+    tags: ['grafo', 'busca', 'pilha'],
+    url: 'busca-em-profundidade'
   }
-  // {
-  //   id: 'depth-first-search',
-  //   title: 'Busca em Profundidade (DFS)',
-  //   description: 'Algoritmo para explorar grafos em profundidade',
-  //   category: 'graph',
-  //   difficulty: 'Intermediário',
-  //   timeComplexity: 'O(V + E)',
-  //   spaceComplexity: 'O(V)',
-  //   tags: ['grafo', 'busca', 'pilha']
-  // },
 
   // // Algoritmos de Ordenação
 

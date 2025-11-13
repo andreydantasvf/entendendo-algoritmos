@@ -191,3 +191,24 @@ export interface BFSStep {
   targetFound: boolean;
   description: string;
 }
+
+export type DFSStepType =
+  | 'start'
+  | 'push'
+  | 'pop'
+  | 'visit'
+  | 'explore'
+  | 'backtrack'
+  | 'found'
+  | 'complete';
+
+export interface DFSStep {
+  type: DFSStepType;
+  currentNode: string | null;
+  stack: string[];
+  visited: string[];
+  exploring: string[];
+  path: string[];
+  targetFound: boolean;
+  description: string;
+}
